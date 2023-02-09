@@ -31,7 +31,9 @@ public class StringAndStringBuilderController {
     private TextField contentSB;
 
     @FXML
-    private ComboBox<?> methodSB;
+    private ComboBox<String> methodSB;
+
+    private StringAndStringBuilderModel model = new StringAndStringBuilderModel();
 
     @FXML
     void onSubmitSB(ActionEvent event) {
@@ -39,7 +41,7 @@ public class StringAndStringBuilderController {
     }
 
     @FXML
-    void onSubmitString(ActionEvent event) {
+    void pastOnSubmitString(ActionEvent event) {
 
         StringBuilder sb = new StringBuilder();
         //get the values for content, method, arguments
@@ -69,6 +71,26 @@ public class StringAndStringBuilderController {
         };
 
         resultString.setText(result.toString());
+
+    }
+
+    @FXML
+    void onSubmitString(ActionEvent event) {
+
+        StringBuilder sb = new StringBuilder();
+        //get the values for content, method, arguments
+        sb.append(contentString.getText());
+        sb.append("-");
+        sb.append(argumentString.getText());
+        sb.append("-");
+        sb.append(methodString.getSelectionModel().getSelectedItem());
+
+
+        String[] info = sb.toString().split("-");
+
+        model.request(info[0], info[2], info[1]);
+
+        resultString.setText(model.getResult());
 
     }
 
