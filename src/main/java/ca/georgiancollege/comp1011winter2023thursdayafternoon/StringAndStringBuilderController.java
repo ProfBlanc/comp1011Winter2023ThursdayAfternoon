@@ -43,7 +43,12 @@ public class StringAndStringBuilderController {
         model.requestSB(info[0], info[2], info[1]);
 
         resultSB.setText(model.getResult());
+/*
+        if(info[2].equals("append"))
+            contentSB.setText(contentSB.getText() + model.getResult());
 
+            ONLY CAN HAPPEN IF NOT FIRST TIME
+*/
 
 
     }

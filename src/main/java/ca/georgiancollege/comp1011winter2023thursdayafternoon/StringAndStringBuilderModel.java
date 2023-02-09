@@ -65,10 +65,46 @@ public class StringAndStringBuilderModel {
         Object returnedValue = switch (method){
 
             case "append": yield sb.append(arguments).toString();
+            case "insert": {
+
+                if(!hasMultipleArguments())
+                    yield ERROR_MSG;
+                String[] args = splitArguments();
+                try {
+                    int index = Integer.parseInt(args[0]);
+                    yield sb.insert(index, args[1]).toString();
+
+                    //sb.insert(1,2)
+
+                    
+                }
+                catch (Exception e){
+                    yield ERROR_MSG;
+                }
+            }
+            case "delete": {
+                if(!hasMultipleArguments())
+                    yield ERROR_MSG;
+                String[] args = splitArguments();
+                int first = Integer.parseInt(args[0]);
+                int second = Integer.parseInt(args[1]);
+                yield sb.delete(first, second).toString();
+            }
             case "capacity": yield sb.capacity();
             case "length": yield sb.length();
             default: yield "Unknown";
         };
+
+/*
+                append
+                insert
+                capacity
+                delete
+                deleteCharAt
+                length
+                replace
+
+ */
 
         sb.setLength(0);
 
