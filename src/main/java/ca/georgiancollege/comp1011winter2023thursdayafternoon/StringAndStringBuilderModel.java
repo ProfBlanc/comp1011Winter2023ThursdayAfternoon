@@ -3,11 +3,22 @@ package ca.georgiancollege.comp1011winter2023thursdayafternoon;
 public class StringAndStringBuilderModel {
 
     private String content, method, arguments, result;
+    private StringBuilder sb;
+
     private static final String COMMA = ",", ERROR_MSG = "ERROR", SW = "startswith", EW = "endswith";
 
     public StringAndStringBuilderModel(){}
 
     public String getContent() {
+                /*
+                append
+                insert
+                capacity
+                delete
+                deleteCharAt
+                length
+                replace
+                 */
         return content;
     }
 
@@ -44,7 +55,27 @@ public class StringAndStringBuilderModel {
     private String[] splitArguments(){
         return arguments.split(COMMA);
     }
-    public void request(String content, String method, String arguments){
+    public void requestSB(String content, String method, String arguments) {
+
+        sb = new StringBuilder(content);
+
+        setArguments(arguments);
+        setMethod(method);
+
+        Object returnedValue = switch (method){
+
+            case "append": yield sb.append(arguments).toString();
+            case "capacity": yield sb.capacity();
+            case "length": yield sb.length();
+            default: yield "Unknown";
+        };
+
+        sb.setLength(0);
+
+        setResult(returnedValue.toString());
+    }
+
+        public void request(String content, String method, String arguments){
 
         setArguments(arguments);
         setContent(content);

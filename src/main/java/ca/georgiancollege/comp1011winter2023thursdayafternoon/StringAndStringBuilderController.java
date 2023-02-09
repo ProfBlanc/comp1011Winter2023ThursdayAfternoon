@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.util.Locale;
 
@@ -37,6 +38,13 @@ public class StringAndStringBuilderController {
 
     @FXML
     void onSubmitSB(ActionEvent event) {
+
+        String[] info = getFormData(contentSB, argumentSB, methodSB);
+        model.requestSB(info[0], info[2], info[1]);
+
+        resultSB.setText(model.getResult());
+
+
 
     }
 
@@ -74,20 +82,24 @@ public class StringAndStringBuilderController {
 
     }
 
+    String[] getFormData(TextField content, TextField argument, ComboBox<String> method){
+        String separator = "-";
+        StringBuilder sb = new StringBuilder();
+        //get the values for content, method, arguments
+        sb.append(content.getText());
+        sb.append(separator);
+        sb.append(argument.getText());
+        sb.append(separator);
+        sb.append(method.getSelectionModel().getSelectedItem());
+
+
+        return sb.toString().split(separator);
+
+    }
     @FXML
     void onSubmitString(ActionEvent event) {
 
-        StringBuilder sb = new StringBuilder();
-        //get the values for content, method, arguments
-        sb.append(contentString.getText());
-        sb.append("-");
-        sb.append(argumentString.getText());
-        sb.append("-");
-        sb.append(methodString.getSelectionModel().getSelectedItem());
-
-
-        String[] info = sb.toString().split("-");
-
+        String[] info = getFormData(contentString, argumentString, methodString);
         model.request(info[0], info[2], info[1]);
 
         resultString.setText(model.getResult());
@@ -108,6 +120,28 @@ public class StringAndStringBuilderController {
         methodString.getItems().add("equals");
 
         methodString.getSelectionModel().selectFirst();
+
+        methodSB.getItems().add("append");
+        methodSB.getItems().add("insert");
+        methodSB.getItems().add("capacity");
+        methodSB.getItems().add("delete");
+        methodSB.getItems().add("deleteCharAt");
+        methodSB.getItems().add("length");
+        methodSB.getItems().add("setLength");
+        methodSB.getItems().add("replace");
+        methodSB.getItems().add("*remove all contents*"); // sb.delete(0, sb.length())  setLength(0)
+/*
+                append
+                insert
+                capacity
+                delete
+                deleteCharAt
+                length
+                replace
+
+ */
+
+
         /*
                 ComboBox
                     Items
