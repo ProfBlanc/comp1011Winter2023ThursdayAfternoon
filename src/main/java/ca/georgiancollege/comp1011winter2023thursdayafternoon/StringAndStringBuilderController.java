@@ -101,6 +101,12 @@ public class StringAndStringBuilderController {
         methodString.getItems().add("contains");
         methodString.getItems().add("startsWith");
         methodString.getItems().add("substring");
+
+
+        methodString.getItems().add("endsWith");
+        methodString.getItems().add("repeat");
+        methodString.getItems().add("equals");
+
         methodString.getSelectionModel().selectFirst();
         /*
                 ComboBox
